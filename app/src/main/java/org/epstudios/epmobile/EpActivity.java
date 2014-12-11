@@ -19,7 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 package org.epstudios.epmobile;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
@@ -43,11 +42,7 @@ public abstract class EpActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
-                    startActivity(new Intent(this, OldPrefs.class));
-                } else {
-                    startActivity(new Intent(this, Prefs.class));
-                }
+                startActivity(new Intent(this, Prefs.class));
                 return true;
             case R.id.about:
                 startActivity(new Intent(this, About.class));

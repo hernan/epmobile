@@ -92,9 +92,6 @@
             android:name=".DrugDoseCalculatorList"
             android:label="@string/drug_dose_calculators_title"></activity>
         <activity
-            android:name=".RiskScoreList"
-            android:label="@string/risk_scores_title"></activity>
-        <activity
             android:name=".Hcm"
             android:label="@string/hcm_title"></activity>
         <activity
@@ -144,13 +141,36 @@
             android:label="@string/brugada_ecg_title"></activity>
         <activity
             android:name=".DiagnosisList"
-            android:label="@string/diagnosis_title"></activity>
+            android:label="@string/diagnosis_title"
+            android:parentActivityName=".EpMobile">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EpMobile" />
+        </activity>
         <activity
             android:name=".CalculatorList"
-            android:label="@string/calculator_title"></activity>
+            android:label="@string/calculator_title"
+            android:parentActivityName=".EpMobile">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EpMobile" />
+        </activity>
         <activity
             android:name=".ReferenceList"
-            android:label="@string/reference_title"></activity>
+            android:label="@string/reference_title"
+            android:parentActivityName=".EpMobile">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EpMobile" />
+        </activity>
+        <activity
+            android:name=".RiskScoreList"
+            android:label="@string/risk_scores_title"
+            android:parentActivityName=".EpMobile">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EpMobile" />
+        </activity>
         <activity
             android:name=".VtList"
             android:label="@string/vt_list_title"></activity>

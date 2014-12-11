@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class ReferenceList extends EpListActivity {
+public class ReferenceList extends EpActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.selectionlist);

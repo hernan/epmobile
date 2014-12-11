@@ -20,8 +20,6 @@ package org.epstudios.epmobile;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -34,30 +32,33 @@ public class EpMobile extends EpActivity {
     public void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.selectionlist);
         super.onCreate(savedInstanceState);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this, R.array.main_index, android.R.layout.simple_list_item_1);
+
         ListView lv = (ListView) findViewById(R.id.list);
         lv.setAdapter(adapter);
-
         lv.setTextFilterEnabled(true);
 
         lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selection = ((TextView) view).getText().toString();
-                if (selection.equals(getString(R.string.calculator_list_title)))
+
+                if (selection.equals(getString(R.string.calculator_list_title))) {
                     calculatorList();
-                else if (selection
-                        .equals(getString(R.string.reference_list_title)))
+
+                }else if (selection.equals(getString(R.string.reference_list_title))) {
                     referenceList();
-                else if (selection
-                        .equals(getString(R.string.risk_score_list_title)))
+
+                }else if (selection.equals(getString(R.string.risk_score_list_title))) {
                     riskScores();
-                else if (selection
-                        .equals(getString(R.string.diagnosis_list_title)))
+
+                }else if (selection.equals(getString(R.string.diagnosis_list_title))) {
                     diagnosisList();
+                }
             }
         });
     }

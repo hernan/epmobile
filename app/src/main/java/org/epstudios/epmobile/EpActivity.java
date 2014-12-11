@@ -18,14 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 package org.epstudios.epmobile;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.app.ActionBarActivity;
-
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -35,8 +32,10 @@ public abstract class EpActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
+
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
+
         return true;
     }
 
@@ -60,6 +59,7 @@ public abstract class EpActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);

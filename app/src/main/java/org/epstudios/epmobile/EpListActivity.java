@@ -18,9 +18,7 @@
 
 package org.epstudios.epmobile;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.MenuItem;
 
 public abstract class EpListActivity extends EpActivity {

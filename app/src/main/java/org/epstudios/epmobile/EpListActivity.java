@@ -19,21 +19,46 @@
 package org.epstudios.epmobile;
 
 import android.content.Intent;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public abstract class EpListActivity extends EpActivity {
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			Intent parentActivityIntent = new Intent(this, EpMobile.class);
-			parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-					| Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(parentActivityIntent);
-			finish();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+    private Class[] klass;
+
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		switch (item.getItemId()) {
+//		case android.R.id.home:
+//			Intent parentActivityIntent = new Intent(this, EpMobile.class);
+//			parentActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
+//					| Intent.FLAG_ACTIVITY_NEW_TASK);
+//			startActivity(parentActivityIntent);
+//			finish();
+//			return true;
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
+
+    public void loadList(int listItems, Class[] options){
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, listItems, android.R.layout.simple_list_item_1);
+
+        klass = options;
+        ListView lv = (ListView) findViewById(R.id.list);
+        lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                withActivity(position);
+            }
+        });
+    }
+
+    private void withActivity(int position) {
+        startActivity( new Intent(this, klass[position]) );
+    }
 }

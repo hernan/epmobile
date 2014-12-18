@@ -14,5 +14,6 @@
     <color name="primary_dark">#0288d1</color>
     <color name="accent">#40c4ff</color>
 
+    <color name="list_item_color">#444</color>
 
 </resources>

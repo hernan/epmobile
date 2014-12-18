@@ -18,49 +18,21 @@
 
 package org.epstudios.epmobile;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class LvhList extends EpDiagnosisListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.selectionlist);
 		super.onCreate(savedInstanceState);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.lvh_criteria_list,
-				android.R.layout.simple_list_item_1);
-        ListView lv = (ListView) findViewById(R.id.list);
-        lv.setAdapter(adapter);
 
-        lv.setTextFilterEnabled(true);
+        // Warning: order is important, should be the same as array definition
+        String klass[] = {
+                "Estes",
+                "LvhVoltage"
+        };
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				String selection = ((TextView) view).getText().toString();
-				if (selection.equals(getString(R.string.estes_criteria_title)))
-					estes();
-				else if (selection
-						.equals(getString(R.string.other_lvh_criteria_title)))
-					otherLvh();
-			}
-		});
+        loadList(R.array.lvh_criteria_list, klass);
+
 	}
 
-	private void estes() {
-		Intent i = new Intent(this, Estes.class);
-		startActivity(i);
-	}
-
-	private void otherLvh() {
-		Intent i = new Intent(this, LvhVoltage.class);
-		startActivity(i);
-	}
 }

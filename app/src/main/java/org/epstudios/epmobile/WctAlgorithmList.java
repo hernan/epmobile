@@ -18,63 +18,22 @@
 
 package org.epstudios.epmobile;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
 public class WctAlgorithmList extends EpDiagnosisListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.selectionlist);
 		super.onCreate(savedInstanceState);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.wct_algorithm_list,
-				android.R.layout.simple_list_item_1);
-        ListView lv = (ListView) findViewById(R.id.list);
-        lv.setAdapter(adapter);
 
-        lv.setTextFilterEnabled(true);
+        // Warning: order is important, should be the same as array definition
+        String klass[] = {
+                "Brugada",
+                "WctMorphologyCriteria",
+                "Rwpt",
+                "Vereckei"
+        };
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				String selection = ((TextView) view).getText().toString();
-				if (selection.equals(getString(R.string.brugada_wct_title)))
-					brugadaAlgorithm();
-				else if (selection.equals(getString(R.string.morphology_title)))
-					morphologyCriteria();
-				else if (selection.equals(getString(R.string.rwpt_title)))
-					ultraSimpleBrugadaAlgorithm();
-				else if (selection.equals(getString(R.string.vereckei_title)))
-					vereckiAlgorithm();
-			}
-		});
-	}
-
-	private void brugadaAlgorithm() {
-		Intent i = new Intent(this, Brugada.class);
-		startActivity(i);
-	}
-
-	private void morphologyCriteria() {
-		Intent i = new Intent(this, WctMorphologyCriteria.class);
-		startActivity(i);
-	}
-
-	private void ultraSimpleBrugadaAlgorithm() {
-		Intent i = new Intent(this, Rwpt.class);
-		startActivity(i);
-	}
-
-	private void vereckiAlgorithm() {
-		Intent i = new Intent(this, Vereckei.class);
-		startActivity(i);
+        loadList(R.array.wct_algorithm_list, klass);
 	}
 
 }

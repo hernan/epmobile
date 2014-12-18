@@ -22,15 +22,9 @@
             android:name=".About"
             android:label="@string/about_title"
             android:theme="@android:style/Theme.Dialog"></activity>
-        <activity
-            android:name=".Qtc"
-            android:label="@string/qtc_calculator_title"></activity>
-        <activity
-            android:name=".Dofetilide"
-            android:label="@string/dofetilide_label"></activity>
-        <activity
-            android:name=".CycleLength"
-            android:label="@string/cycle_length_label"></activity>
+
+
+
         <activity
             android:name=".Prefs"
             android:label="@string/settings_title"></activity>
@@ -46,12 +40,8 @@
         <activity
             android:name=".ChadsVasc"
             android:label="@string/chadsvasc_title"></activity>
-        <activity
-            android:name=".Dabigatran"
-            android:label="@string/dabigatran_label"></activity>
-        <activity
-            android:name=".Warfarin"
-            android:label="@string/warfarin_label"></activity>
+
+
         <activity
             android:name=".DoseTable"
             android:label="@string/dose_table_title"></activity>
@@ -82,15 +72,11 @@
         <activity
             android:name=".ArvcOld"
             android:label="@string/arvc_old_criteria_title"></activity>
-        <activity
-            android:name=".Rivaroxaban"
-            android:label="@string/rivaroxaban_calculator_title"></activity>
+
         <activity
             android:name=".ShortQt"
             android:label="@string/short_qt_title"></activity>
-        <activity
-            android:name=".DrugDoseCalculatorList"
-            android:label="@string/drug_dose_calculators_title"></activity>
+
         <activity
             android:name=".Hcm"
             android:label="@string/hcm_title"></activity>
@@ -140,16 +126,16 @@
             android:name=".BrugadaEcg"
             android:label="@string/brugada_ecg_title"></activity>
         <activity
-            android:name=".DiagnosisList"
-            android:label="@string/diagnosis_title"
+            android:name=".CalculatorList"
+            android:label="@string/calculator_title"
             android:parentActivityName=".EpMobile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".EpMobile" />
         </activity>
         <activity
-            android:name=".CalculatorList"
-            android:label="@string/calculator_title"
+            android:name=".DiagnosisList"
+            android:label="@string/diagnosis_title"
             android:parentActivityName=".EpMobile">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -171,6 +157,101 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".EpMobile" />
         </activity>
+
+        <!-- Calculators -->
+        <activity
+            android:name=".IbwCalculator"
+            android:label="@string/ibw_calculator_title"
+            android:parentActivityName=".CalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CalculatorList" />
+        </activity>
+        <activity
+            android:name=".DayCalculator"
+            android:label="@string/day_calculator_title"
+            android:parentActivityName=".CalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CalculatorList" />
+        </activity>
+        <activity
+            android:name=".DrugDoseCalculatorList"
+            android:label="@string/drug_dose_calculators_title"
+            android:parentActivityName=".CalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CalculatorList" />
+        </activity>
+        <activity
+            android:name=".CycleLength"
+            android:label="@string/cycle_length_label"
+            android:parentActivityName=".CalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CalculatorList" />
+        </activity>
+        <activity
+            android:name=".Qtc"
+            android:label="@string/qtc_calculator_title"
+            android:parentActivityName=".CalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CalculatorList" />
+        </activity>
+
+        <!-- Drug Dose Calculators -->
+        <activity
+            android:name=".Dabigatran"
+            android:label="@string/dabigatran_label"
+            android:parentActivityName=".DrugDoseCalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DrugDoseCalculatorList" />
+        </activity>
+        <activity
+            android:name=".Dofetilide"
+            android:label="@string/dofetilide_label"
+            android:parentActivityName=".DrugDoseCalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DrugDoseCalculatorList" />
+        </activity>
+        <activity
+            android:name=".Rivaroxaban"
+            android:label="@string/rivaroxaban_calculator_title"
+            android:parentActivityName=".DrugDoseCalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DrugDoseCalculatorList" />
+        </activity>
+        <activity
+            android:name=".Warfarin"
+            android:label="@string/warfarin_label"
+            android:parentActivityName=".DrugDoseCalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DrugDoseCalculatorList" />
+        </activity>
+        <activity
+            android:name=".Sotalol"
+            android:label="@string/sotalol_calculator_title"
+            android:parentActivityName=".DrugDoseCalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DrugDoseCalculatorList" />
+        </activity>
+        <activity
+            android:name=".Apixaban"
+            android:label="@string/apixaban_calculator_title"
+            android:parentActivityName=".DrugDoseCalculatorList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".DrugDoseCalculatorList" />
+        </activity>
+
+
+
         <activity
             android:name=".VtList"
             android:label="@string/vt_list_title"></activity>
@@ -183,24 +264,16 @@
         <activity
             android:name=".MitralAnnularVt"
             android:label="@string/mitral_annular_vt_title"></activity>
-        <activity
-            android:name=".Sotalol"
-            android:label="@string/sotalol_calculator_title"></activity>
-        <activity
-            android:name=".Apixaban"
-            android:label="@string/apixaban_calculator_title"></activity>
+
+
         <activity
             android:name=".AtrialTachLocalization"
             android:label="@string/atrial_tachycardia_localization_title"></activity>
-        <activity
-            android:name=".DayCalculator"
-            android:label="@string/day_calculator_title"></activity>
+
         <activity
             android:name=".Entrainment"
             android:label="@string/entrainment_title"></activity>
-        <activity
-            android:name=".IbwCalculator"
-            android:label="@string/ibw_calculator_title"></activity>
+
         <activity
             android:name=".SyncopeRiskScoreList"
             android:label="@string/syncope_list_title"></activity>

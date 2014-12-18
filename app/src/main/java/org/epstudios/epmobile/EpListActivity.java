@@ -19,6 +19,8 @@
 package org.epstudios.epmobile;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -26,9 +28,16 @@ import android.widget.ListView;
 
 public abstract class EpListActivity extends EpActivity {
 
-    private Class[] klass;
+    private String[] klass;
 
-//	@Override
+    @Override
+    protected void onCreate(Bundle saveInstanceState) {
+        setContentView(R.layout.selectionlist);
+        super.onCreate(saveInstanceState);
+
+    }
+
+    //	@Override
 //	public boolean onOptionsItemSelected(MenuItem item) {
 //		switch (item.getItemId()) {
 //		case android.R.id.home:
@@ -42,9 +51,9 @@ public abstract class EpListActivity extends EpActivity {
 //		return super.onOptionsItemSelected(item);
 //	}
 
-    public void loadList(int listItems, Class[] options){
+    public void loadList(int listItems, String[] options){
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, listItems, android.R.layout.simple_list_item_1);
+                this, listItems, R.layout.simple_list_item);
 
         klass = options;
         ListView lv = (ListView) findViewById(R.id.list);
@@ -59,6 +68,19 @@ public abstract class EpListActivity extends EpActivity {
     }
 
     private void withActivity(int position) {
-        startActivity( new Intent(this, klass[position]) );
+        try {
+            Class actClass = Class.forName("org.epstudios.epmobile." + klass[position]);
+            startActivity( new Intent(this, actClass) );
+
+        } catch (ClassNotFoundException e) {
+            startActivity(new Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(klass[position])
+            ));
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

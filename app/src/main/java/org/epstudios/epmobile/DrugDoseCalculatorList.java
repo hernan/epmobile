@@ -18,83 +18,26 @@
 
 package org.epstudios.epmobile;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
 
-public class DrugDoseCalculatorList extends EpCalculatorListActivity {
+//EpCalculatorListActivity
+public class DrugDoseCalculatorList extends EpListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.selectionlist);
         super.onCreate(savedInstanceState);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.drug_calculator_list,
-				android.R.layout.simple_list_item_1);
-        ListView lv = (ListView) findViewById(R.id.list);
-        lv.setAdapter(adapter);
 
-        lv.setTextFilterEnabled(true);
+        // Warning: order is important, should be the same as array definition
+        String klass[] = {
+                "Dabigatran",
+                "Dofetilide",
+                "Rivaroxaban",
+                "Warfarin",
+                "Sotalol",
+                "Apixaban"
+        };
 
-		lv.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				String selection = ((TextView) view).getText().toString();
-				if (selection
-						.equals(getString(R.string.dabigatran_calculator_title)))
-					dabigatranCalculator();
-				else if (selection
-						.equals(getString(R.string.dofetilide_calculator_title)))
-					dofetilideCalculator();
-				else if (selection
-						.equals(getString(R.string.rivaroxaban_calculator_title)))
-					rivaroxabanCalculator();
-				else if (selection.equals(getString(R.string.warfarin_title)))
-					warfarinCalculator();
-				else if (selection
-						.equals(getString(R.string.sotalol_calculator_title)))
-					sotalolCalculator();
-				else if (selection
-						.equals(getString(R.string.apixaban_calculator_title)))
-					apixabanCalculator();
+        loadList(R.array.drug_calculator_list, klass);
 
-			}
-		});
-	}
-
-	private void dabigatranCalculator() {
-		Intent i = new Intent(this, Dabigatran.class);
-		startActivity(i);
-	}
-
-	private void dofetilideCalculator() {
-		Intent i = new Intent(this, Dofetilide.class);
-		startActivity(i);
-	}
-
-	private void rivaroxabanCalculator() {
-		Intent i = new Intent(this, Rivaroxaban.class);
-		startActivity(i);
-	}
-
-	private void warfarinCalculator() {
-		Intent i = new Intent(this, Warfarin.class);
-		startActivity(i);
-	}
-
-	private void sotalolCalculator() {
-		Intent i = new Intent(this, Sotalol.class);
-		startActivity(i);
-	}
-
-	private void apixabanCalculator() {
-		Intent i = new Intent(this, Apixaban.class);
-		startActivity(i);
 	}
 
 }

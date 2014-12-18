@@ -24,17 +24,16 @@ public class EpMobile extends EpListActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.selectionlist);
         super.onCreate(savedInstanceState);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         // Warning: order is important, should be the same as array definition
-        Class klass[] = {
-                CalculatorList.class,
-                DiagnosisList.class,
-                ReferenceList.class,
-                RiskScoreList.class
+        String klass[] = {
+                "CalculatorList",
+                "DiagnosisList",
+                "ReferenceList",
+                "RiskScoreList"
         };
 
         loadList(R.array.main_index, klass);

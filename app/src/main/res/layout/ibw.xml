@@ -8,140 +8,179 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-           >
+            android:padding="@dimen/activity_horizontal_margin">
 
-            <TableLayout
+
+            <RadioGroup
+                android:id="@+id/sexRadioGroup"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:stretchColumns="*">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <RadioGroup
-                    android:id="@+id/sexRadioGroup"
+                <RadioButton
+                    android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:checked="true"
+                    android:text="@string/male_label" />
 
-                    <RadioButton
-                        android:id="@+id/male"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/male_label"></RadioButton>
-
-                    <RadioButton
-                        android:id="@+id/female"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/female_label"></RadioButton>
-                </RadioGroup>
-
-                <TableRow>
-
-                    <Spinner android:id="@+id/weight_spinner" />
-
-                    <EditText
-                        android:id="@+id/weightEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/weight_hint"
-                        android:inputType="numberDecimal"></EditText>
-                </TableRow>
-
-                <TableRow>
-
-                    <Spinner android:id="@+id/height_spinner" />
-
-                    <EditText
-                        android:id="@+id/heightEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/height_hint"
-                        android:inputType="numberDecimal"></EditText>
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/ibwTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ibw_label"
-                        android:textAppearance="?android:attr/textAppearanceSmall"></TextView>
-
-                    <TextView
-                        android:id="@+id/ibwResultTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="@string/ibw_hint"
-                        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-                </TableRow>
-
-                <TableRow>
-
-                    <TextView
-                        android:id="@+id/abwTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/abw_label"
-                        android:textAppearance="?android:attr/textAppearanceSmall"></TextView>
-
-                    <TextView
-                        android:id="@+id/abwResultTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="@string/abw_hint"
-                        android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
-                </TableRow>
-            </TableLayout>
+                <RadioButton
+                    android:id="@+id/female"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/female_label"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin" />
+            </RadioGroup>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp">
 
-                <Button
-                    android:id="@+id/calculate_button"
-                    android:layout_width="wrap_content"
+                <Spinner
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/calculate_label"></Button>
+                    android:gravity="left"
+                    android:id="@+id/weight_spinner"
+                    android:layout_weight="2" />
 
-                <Button
-                    android:id="@+id/clear_button"
-                    android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/weightEditText"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/clear_label"></Button>
+                    android:hint="@string/weight_hint"
+                    android:inputType="numberDecimal"
+                    android:layout_weight="1" />
             </LinearLayout>
 
-            <Button
-                android:id="@+id/copy_ibw_button"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/copy_ibw_label"></Button>
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
 
-            <Button
-                android:id="@+id/copy_abw_button"
-                android:layout_width="wrap_content"
+                <Spinner
+                    android:id="@+id/height_spinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"/>
+
+                <EditText
+                    android:id="@+id/heightEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/height_hint"
+                    android:inputType="numberDecimal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/copy_abw_label"></Button>
+                android:orientation="horizontal"
+                android:layout_marginTop="24dp">
+
+                <TextView
+                    android:id="@+id/ibwTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/ibw_label"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:id="@+id/ibwResultTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/ibw_hint"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+                <TextView
+                    android:id="@+id/abwTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="@string/abw_label"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:id="@+id/abwResultTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/abw_hint"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/messageTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:text=""
-                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/calculate_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/calculate_label" />
+
+                <Button
+                    android:id="@+id/clear_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/clear_label" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/copy_ibw_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/copy_ibw_label" />
+
+                <Button
+                    android:id="@+id/copy_abw_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/copy_abw_label" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

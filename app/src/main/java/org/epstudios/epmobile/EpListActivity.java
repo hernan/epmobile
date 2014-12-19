@@ -71,16 +71,24 @@ public abstract class EpListActivity extends EpActivity {
         try {
             Class actClass = Class.forName("org.epstudios.epmobile." + klass[position]);
             startActivity( new Intent(this, actClass) );
+//            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         } catch (ClassNotFoundException e) {
             startActivity(new Intent(
                     Intent.ACTION_VIEW,
                     Uri.parse(klass[position])
             ));
+//            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
         } catch(Exception e) {
             e.printStackTrace();
         }
 
     }
+
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//    }
 }

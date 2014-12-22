@@ -16,4 +16,6 @@
 
     <color name="list_item_color">#444</color>
 
+    <color name="calc_success">#00AA00</color>
+    <color name="calc_error">#aa0000</color>
 </resources>

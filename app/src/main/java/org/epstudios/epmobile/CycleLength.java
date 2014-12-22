@@ -18,7 +18,6 @@
 
 package org.epstudios.epmobile;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -100,7 +99,7 @@ public class CycleLength extends EpActivity implements OnClickListener {
 	}
 
 	private void calculateResult() {
-		resultTextView.setTextColor(getResources().getColor(R.color.green));
+		resultTextView.setTextColor(getResources().getColor(R.color.calc_success));
 
 		try {
             int result = Integer.parseInt(inputEditText.getText().toString());
@@ -120,7 +119,7 @@ public class CycleLength extends EpActivity implements OnClickListener {
 
 		} catch (NumberFormatException e) {
 			resultTextView.setText(getString(R.string.invalid_warning));
-			resultTextView.setTextColor(Color.RED);
+			resultTextView.setTextColor(getResources().getColor(R.color.calc_error));
 		}
 	}
 

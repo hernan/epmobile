@@ -28,6 +28,12 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 public class CycleLength extends EpActivity implements OnClickListener {
+
+    private TextView resultTextView;
+    private EditText inputEditText;
+    private RadioGroup intervalRateRadioGroup;
+    private TextView measurementTextView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		setContentView(R.layout.cyclelength);
@@ -37,15 +43,19 @@ public class CycleLength extends EpActivity implements OnClickListener {
 		calculateResultButton.setOnClickListener(this);
 		View clearButton = findViewById(R.id.clear_button);
 		clearButton.setOnClickListener(this);
+
 		intervalRateRadioGroup = (RadioGroup) findViewById(R.id.intervalRateRadioGroup);
 		resultTextView = (TextView) findViewById(R.id.calculated_result);
 		inputEditText = (EditText) findViewById(R.id.inputEditText);
-		clRadioButton = (RadioButton) findViewById(R.id.cl_button);
-		hrRadioButton = (RadioButton) findViewById(R.id.hr_button);
+
+        RadioButton clRadioButton = (RadioButton) findViewById(R.id.cl_button);
+        RadioButton hrRadioButton = (RadioButton) findViewById(R.id.hr_button);
 		clRadioButton.setOnClickListener(this);
 		hrRadioButton.setOnClickListener(this);
+
 		measurementTextView = (TextView) findViewById(R.id.MeasurementTextView);
-		if (savedInstanceState != null) {
+
+        if (savedInstanceState != null) {
 			String savedLabel = savedInstanceState.getString("label");
 			String savedHint = savedInstanceState.getString("hint");
 			measurementTextView.setText(savedLabel);
@@ -61,13 +71,6 @@ public class CycleLength extends EpActivity implements OnClickListener {
 
 	}
 
-	private TextView resultTextView;
-	private EditText inputEditText;
-	private RadioGroup intervalRateRadioGroup;
-	private RadioButton clRadioButton;
-	private RadioButton hrRadioButton;
-	private TextView measurementTextView;
-
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -80,39 +83,41 @@ public class CycleLength extends EpActivity implements OnClickListener {
 		case R.id.cl_button:
 		case R.id.hr_button:
 			setInputHint();
-			setMeasurementTextView();
 			break;
 		}
 	}
 
 	private void setInputHint() {
-		if (intervalRateRadioGroup.getCheckedRadioButtonId() == R.id.cl_button)
-			inputEditText.setHint(R.string.cl_hint);
-		else
-			inputEditText.setHint(R.string.hr_hint);
-	}
+		if (intervalRateRadioGroup.getCheckedRadioButtonId() == R.id.cl_button) {
+            inputEditText.setHint(R.string.cl_hint);
+            measurementTextView.setText(R.string.cl_hint);
 
-	private void setMeasurementTextView() {
-		if (intervalRateRadioGroup.getCheckedRadioButtonId() == R.id.cl_button)
-			measurementTextView.setText(R.string.cl_hint);
-		else
-			measurementTextView.setText(R.string.hr_hint);
+        }
+        else {
+            inputEditText.setHint(R.string.hr_hint);
+            measurementTextView.setText(R.string.hr_hint);
+        }
 	}
 
 	private void calculateResult() {
-		CharSequence resultText = inputEditText.getText();
 		resultTextView.setTextColor(getResources().getColor(R.color.green));
+
 		try {
-			int result = Integer.parseInt(resultText.toString());
-			if (result == 0)
-				throw new NumberFormatException();
-			result = calculate(result);
-			if (intervalRateRadioGroup.getCheckedRadioButtonId() == R.id.cl_button)
-				resultTextView.setText("Rate = " + String.valueOf(result)
-						+ " bpm");
-			else
-				resultTextView.setText("Interval = " + String.valueOf(result)
-						+ " msec");
+            int result = Integer.parseInt(inputEditText.getText().toString());
+
+            if (result == 0) {
+                throw new NumberFormatException();
+            }
+
+            result = calculate(result);
+
+            if (intervalRateRadioGroup.getCheckedRadioButtonId() == R.id.cl_button){
+                resultTextView.setText("Rate = " + String.valueOf(result) + " bpm");
+            }
+            else{
+                resultTextView.setText("Interval = " + String.valueOf(result) + " msec");
+            }
+
 		} catch (NumberFormatException e) {
 			resultTextView.setText(getString(R.string.invalid_warning));
 			resultTextView.setTextColor(Color.RED);
@@ -124,6 +129,7 @@ public class CycleLength extends EpActivity implements OnClickListener {
 		if (BuildConfig.DEBUG && value == 0) {
 			throw new AssertionError();
 		}
+
 		return (int) Math.round(60000.0 / value);
 	}
 

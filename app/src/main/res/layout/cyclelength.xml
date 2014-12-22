@@ -18,65 +18,65 @@
         <RadioGroup
             android:id="@+id/intervalRateRadioGroup"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
 
             <RadioButton
                 android:id="@+id/cl_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/cl_label"></RadioButton>
+                android:text="@string/cl_label" />
 
             <RadioButton
                 android:id="@+id/hr_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/hr_label"></RadioButton>
+                android:text="@string/hr_label" />
         </RadioGroup>
 
         <TableRow>
-
             <TextView
                 android:id="@+id/MeasurementTextView"
                 android:text="@string/cl_hint"
-                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
                 android:id="@+id/inputEditText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:hint="@string/cl_hint"
                 android:inputType="number"
-                android:text=""></EditText>
+                android:text="" />
         </TableRow>
+
+        <TextView
+            android:id="@+id/calculated_result"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/calculated_result_label"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:padding="3dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/calculate_result_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/calculate_label"></Button>
-
-            <TextView
-                android:id="@+id/calculated_result"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:text="@string/calculated_result_label"
-                android:textAppearance="?android:attr/textAppearanceMedium"></TextView>
+                android:text="@string/calculate_label" />
 
             <Button
                 android:id="@+id/clear_button"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/clear_label"></Button>
+                android:layout_weight="1"
+                android:text="@string/clear_label" />
         </LinearLayout>
 
     </TableLayout>

@@ -8,24 +8,23 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            >
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/index_event_label"
-                android:textAppearance="?android:attr/textAppearanceLarge" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <DatePicker
                 android:id="@+id/indexDatePicker"
@@ -45,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/number_of_days_label"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <EditText
                     android:id="@+id/numberOfDaysEditText"
@@ -55,13 +54,14 @@
                     android:ems="10"
                     android:gravity="end"
                     android:hint="@string/number_of_days_hint"
-                    android:inputType="numberSigned"></EditText>
+                    android:inputType="numberSigned" />
             </LinearLayout>
 
             <RadioGroup
                 android:id="@+id/dayRadioGroup"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
 
                 <RadioButton
                     android:id="@+id/ninetyRadio"
@@ -87,33 +87,38 @@
                 android:id="@+id/reverseTimeCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/reverse_time_label" />
+                android:text="@string/reverse_time_label"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/calculated_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_horizontal"
+                android:text="@string/date_result_label"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
             <LinearLayout
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
 
                 <Button
                     android:id="@+id/calculate_date_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/calculate_label" />
-
-                <TextView
-                    android:id="@+id/calculated_date"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
-                    android:text="@string/date_result_label"
-                    android:textAppearance="?android:attr/textAppearanceLarge"></TextView>
+                    android:text="@string/calculate_label" />
 
                 <Button
                     android:id="@+id/clear_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/clear_label"></Button>
+                    android:layout_weight="1"
+                    android:text="@string/clear_label" />
             </LinearLayout>
         </LinearLayout>
 

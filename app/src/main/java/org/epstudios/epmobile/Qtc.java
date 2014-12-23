@@ -19,7 +19,6 @@
 package org.epstudios.epmobile;
 
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -30,7 +29,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.epstudios.epmobile.QtcCalculator.QtcFormula;
 
@@ -38,6 +36,26 @@ public class Qtc extends EpActivity implements OnClickListener {
 	private enum IntervalRate {
 		INTERVAL, RATE
 	}
+
+    private Spinner intervalRateSpinner;
+    private TextView qtcTextView;
+    private EditText rrEditText;
+    private EditText qtEditText;
+    private String qtcFormula;
+    private OnItemSelectedListener itemListener;
+    private Spinner qtcFormulaSpinner;
+
+    private int qtcUpperLimit;
+    private final static int QTC_UPPER_LIMIT = 440;
+    private final static int INTERVAL_SELECTION = 0;
+    private final static int RATE_SELECTION = 1;
+
+    private final static int BAZETT_FORMULA = 0;
+    private final static int FRIDERICIA_FORMULA = 1;
+    private final static int SAGIE_FORMULA = 2;
+    private final static int HODGES_FORMULA = 3;
+
+    private IntervalRate defaultIntervalRateSelection = IntervalRate.INTERVAL;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +71,6 @@ public class Qtc extends EpActivity implements OnClickListener {
 		qtcTextView = (TextView) findViewById(R.id.calculated_qtc);
 		rrEditText = (EditText) findViewById(R.id.rrEditText);
 		qtEditText = (EditText) findViewById(R.id.qtEditText);
-		qtcFormulaTextView = (TextView) findViewById(R.id.qtc_formula);
 		qtcFormulaSpinner = (Spinner) findViewById(R.id.qtc_formula_spinner);
 
 		getPrefs();
@@ -63,27 +80,6 @@ public class Qtc extends EpActivity implements OnClickListener {
 		clearEntries();
 
 	}
-
-	private Spinner intervalRateSpinner;
-	private TextView qtcTextView;
-	private EditText rrEditText;
-	private EditText qtEditText;
-	private TextView qtcFormulaTextView;
-	private String qtcFormula;
-	private OnItemSelectedListener itemListener;
-	private Spinner qtcFormulaSpinner;
-
-	private int qtcUpperLimit;
-	private final static int QTC_UPPER_LIMIT = 440;
-	private final static int INTERVAL_SELECTION = 0;
-	private final static int RATE_SELECTION = 1;
-
-	private final static int BAZETT_FORMULA = 0;
-	private final static int FRIDERICIA_FORMULA = 1;
-	private final static int SAGIE_FORMULA = 2;
-	private final static int HODGES_FORMULA = 3;
-
-	private IntervalRate defaultIntervalRateSelection = IntervalRate.INTERVAL;
 
 	@Override
 	public void onClick(View v) {
@@ -99,18 +95,23 @@ public class Qtc extends EpActivity implements OnClickListener {
 
 	private void setAdapters() {
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.interval_rate_labels,
+				this,
+                R.array.interval_rate_labels,
 				android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
 		intervalRateSpinner.setAdapter(adapter);
-		if (defaultIntervalRateSelection.equals(IntervalRate.INTERVAL))
-			intervalRateSpinner.setSelection(INTERVAL_SELECTION);
-		else
-			intervalRateSpinner.setSelection(RATE_SELECTION);
-		itemListener = new OnItemSelectedListener() {
+
+		if (defaultIntervalRateSelection.equals(IntervalRate.INTERVAL)) {
+            intervalRateSpinner.setSelection(INTERVAL_SELECTION);
+
+        }else {
+            intervalRateSpinner.setSelection(RATE_SELECTION);
+        }
+
+        itemListener = new OnItemSelectedListener() {
 			@Override
-			public void onItemSelected(AdapterView<?> parent, View v,
-					int position, long id) {
+			public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
 				updateIntervalRateSelection();
 			}
 
@@ -127,12 +128,16 @@ public class Qtc extends EpActivity implements OnClickListener {
 
 	private void setFormulaAdapters() {
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-				this, R.array.formula_names,
+				this,
+                R.array.formula_names,
 				android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		qtcFormulaSpinner.setAdapter(adapter);
-		int formula = BAZETT_FORMULA;
+
+        qtcFormulaSpinner.setAdapter(adapter);
+
+        int formula = BAZETT_FORMULA;
 		QtcFormula f = getQtcFormula(qtcFormula);
+
 		switch (f) {
 		case BAZETT:
 			formula = BAZETT_FORMULA;
@@ -147,11 +152,11 @@ public class Qtc extends EpActivity implements OnClickListener {
 			formula = HODGES_FORMULA;
 			break;
 		}
+
 		qtcFormulaSpinner.setSelection(formula);
 		itemListener = new OnItemSelectedListener() {
 			@Override
-			public void onItemSelected(AdapterView<?> parent, View v,
-					int position, long id) {
+			public void onItemSelected(AdapterView<?> parent, View v, int position, long id) {
 				updateQtcFormula();
 			}
 
@@ -167,82 +172,94 @@ public class Qtc extends EpActivity implements OnClickListener {
 	}
 
 	private void updateQtcFormula() {
-		int result = qtcFormulaSpinner.getSelectedItemPosition();
-		switch (result) {
-		case BAZETT_FORMULA:
-			qtcFormula = "BAZETT";
-			break;
-		case FRIDERICIA_FORMULA:
-			qtcFormula = "FRIDERICIA";
-			break;
-		case SAGIE_FORMULA:
-			qtcFormula = "SAGIE";
-			break;
-		case HODGES_FORMULA:
-			qtcFormula = "HODGES";
-			break;
+		switch (qtcFormulaSpinner.getSelectedItemPosition()) {
+            case BAZETT_FORMULA:
+                qtcFormula = "BAZETT";
+                break;
+            case FRIDERICIA_FORMULA:
+                qtcFormula = "FRIDERICIA";
+                break;
+            case SAGIE_FORMULA:
+                qtcFormula = "SAGIE";
+                break;
+            case HODGES_FORMULA:
+                qtcFormula = "HODGES";
+                break;
 		}
 	}
 
 	private void updateIntervalRateSelection() {
 		IntervalRate intervalRateSelection = getIntervalRateSelection();
-		if (intervalRateSelection.equals(IntervalRate.INTERVAL))
-			rrEditText.setHint(getString(R.string.rr_hint));
-		else
-			rrEditText.setHint(getString(R.string.hr_hint));
+
+		if (intervalRateSelection.equals(IntervalRate.INTERVAL)) {
+            rrEditText.setHint(getString(R.string.rr_hint));
+
+        }else {
+            rrEditText.setHint(getString(R.string.hr_hint));
+        }
 	}
 
 	private IntervalRate getIntervalRateSelection() {
 		String result = intervalRateSpinner.getSelectedItem().toString();
-		if (result.startsWith("RR"))
-			return IntervalRate.INTERVAL;
-		else
-			return IntervalRate.RATE;
 
-	}
+        if (result.startsWith("RR")) {
+            return IntervalRate.INTERVAL;
 
-	private void showQtcFormula() {
-		qtcFormulaTextView.setText("QTc formula used was " + qtcFormula);
+        }else {
+            return IntervalRate.RATE;
+        }
 	}
 
 	private void calculateQtc() {
 		CharSequence rrText = rrEditText.getText();
 		CharSequence qtText = qtEditText.getText();
 		IntervalRate intervalRateSelection = getIntervalRateSelection();
+
 		try {
-			int rr = Integer.parseInt(rrText.toString());
-			if (intervalRateSelection.equals(IntervalRate.RATE))
-				rr = 60000 / rr;
-			int qt = Integer.parseInt(qtText.toString());
-			// getPrefs();
-			showQtcFormula();
-			QtcFormula formula = getQtcFormula(qtcFormula);
-			Toast.makeText(this, "QTc Formula is " + qtcFormula,
-					Toast.LENGTH_LONG).show();
-			int qtc = QtcCalculator.calculate(rr, qt, formula);
-			qtcTextView.setText("QTc = " + String.valueOf(qtc) + " msec");
-			if (qtc >= qtcUpperLimit)
-				qtcTextView.setTextColor(Color.RED);
-			else
-				qtcTextView
-						.setTextColor(getResources().getColor(R.color.green));
+            int rr = Integer.parseInt(rrText.toString());
+            int qt = Integer.parseInt(qtText.toString());
+            int rc;
+
+            if (intervalRateSelection.equals(IntervalRate.RATE)) {
+                rr = 60000 / rr;
+            }
+
+            // getPrefs();
+            QtcFormula formula = getQtcFormula(qtcFormula);
+
+            //Toast.makeText(this, "QTc Formula is " + qtcFormula, Toast.LENGTH_LONG).show();
+
+            int qtc = QtcCalculator.calculate(rr, qt, formula);
+            qtcTextView.setText("QTc = " + String.valueOf(qtc) + " msec");
+
+            if (qtc >= qtcUpperLimit) {
+                rc = R.color.calc_error;
+
+            } else {
+                rc = R.color.calc_success;
+            }
+
+            qtcTextView.setTextColor(getResources().getColor(rc));
+
 		} catch (NumberFormatException e) {
 			qtcTextView.setText(getString(R.string.invalid_warning));
-			qtcTextView.setTextColor(Color.RED);
+			qtcTextView.setTextColor(getResources().getColor(R.color.calc_error));
 		}
 	}
 
 	private QtcFormula getQtcFormula(String name) {
-		if (name.equals("BAZETT"))
-			return QtcFormula.BAZETT;
-		else if (name.equals("FRIDERICIA"))
-			return QtcFormula.FRIDERICIA;
-		else if (name.equals("SAGIE"))
-			return QtcFormula.SAGIE;
-		else if (name.equals("HODGES"))
-			return QtcFormula.HODGES;
-		else
-			return QtcFormula.BAZETT;
+        switch (name) {
+            case "BAZETT":
+                return QtcFormula.BAZETT;
+            case "FRIDERICIA":
+                return QtcFormula.FRIDERICIA;
+            case "SAGIE":
+                return QtcFormula.SAGIE;
+            case "HODGES":
+                return QtcFormula.HODGES;
+            default:
+                return QtcFormula.BAZETT;
+        }
 
 	}
 
@@ -250,24 +267,28 @@ public class Qtc extends EpActivity implements OnClickListener {
 		rrEditText.setText(null);
 		qtEditText.setText(null);
 		qtcTextView.setText(getString(R.string.qtc_result_label));
-		qtcTextView.setTextColor(Color.LTGRAY);
-		qtcFormulaTextView.setText(null);
+		//qtcTextView.setTextColor(Color.LTGRAY);
 		rrEditText.requestFocus();
 	}
 
 	private void getPrefs() {
-		SharedPreferences prefs = PreferenceManager
-				.getDefaultSharedPreferences(getBaseContext());
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+
 		qtcFormula = prefs.getString("qtc_formula", "BAZETT");
-		String intervalRatePreference = prefs.getString("interval_rate",
-				"INTERVAL");
-		if (intervalRatePreference.equals("INTERVAL"))
-			defaultIntervalRateSelection = IntervalRate.INTERVAL;
-		else
-			defaultIntervalRateSelection = IntervalRate.RATE;
+		String intervalRatePreference = prefs.getString("interval_rate","INTERVAL");
+
+		if (intervalRatePreference.equals("INTERVAL")) {
+            defaultIntervalRateSelection = IntervalRate.INTERVAL;
+
+        } else {
+            defaultIntervalRateSelection = IntervalRate.RATE;
+        }
+
 		String s = prefs.getString("maximum_qtc", "");
+
 		try {
 			qtcUpperLimit = Integer.parseInt(s);
+
 		} catch (NumberFormatException e) {
 			qtcUpperLimit = QTC_UPPER_LIMIT;
 			SharedPreferences.Editor editor = prefs.edit();

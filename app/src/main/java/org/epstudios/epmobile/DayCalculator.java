@@ -44,10 +44,10 @@ public class DayCalculator extends EpActivity implements OnClickListener {
 
 					@Override
 					public void onCheckedChanged(RadioGroup group, int checkedId) {
-						RadioButton checkedRadioButton = (RadioButton) group
-								.findViewById(checkedId);
+						RadioButton checkedRadioButton = (RadioButton) group.findViewById(checkedId);
 						int index = group.indexOfChild(checkedRadioButton);
 						int number = 0;
+
 						switch (index) {
 						case 0:
 							number = 90;
@@ -60,6 +60,7 @@ public class DayCalculator extends EpActivity implements OnClickListener {
 							break;
 						// else still = 0;
 						}
+
 						if (number != 0)
 							numberOfDaysEditText.setText(String.valueOf(number));
 					}
@@ -83,20 +84,23 @@ public class DayCalculator extends EpActivity implements OnClickListener {
 		CharSequence numberOfDays = numberOfDaysEditText.getText();
 		try {
 			int number = Integer.parseInt(numberOfDays.toString());
-			if (reverseTimeCheckBox.isChecked())
-				number = -number;
+
+			if (reverseTimeCheckBox.isChecked()) {
+                number = -number;
+            }
+
 			Calendar cal = new GregorianCalendar(indexDatePicker.getYear(),
-					indexDatePicker.getMonth(), indexDatePicker.getDayOfMonth());
+					                             indexDatePicker.getMonth(),
+                                                 indexDatePicker.getDayOfMonth());
 			cal.add(Calendar.DATE, number);
-			// DateFormat =
-			// SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			calculatedDateTextView.setText(DateFormat.getDateInstance(
-					DateFormat.MEDIUM).format(cal.getTime()));
+
+			calculatedDateTextView.setText(DateFormat.getDateInstance(DateFormat.MEDIUM)
+                                  .format(cal.getTime()));
 
 		} catch (NumberFormatException e) {
 			calculatedDateTextView.setText(getString(R.string.invalid_warning,
 					this));
-			calculatedDateTextView.setTextColor(Color.RED);
+			calculatedDateTextView.setTextColor(getResources().getColor(R.color.calc_error));
 		}
 
 	}
